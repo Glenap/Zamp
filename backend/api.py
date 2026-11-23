@@ -15,7 +15,6 @@ from backend.db import BACKEND_DIR, connect, database_path
 from backend import service
 
 router = APIRouter(prefix="/api")
-MAX_FILE_BYTES = 10 * 1024 * 1024
 
 
 def run_pipeline(run_id, path):
@@ -52,14 +51,17 @@ def sniff(data):
 
 
 async def store_uploads(files):
-    if len(files) > 4:
-        raise HTTPException(422, "Upload at most four documents")
+    policy = service.settings()
+    max_files = policy["max_documents"]
+    max_bytes = policy["max_upload_bytes"]
+    if len(files) > max_files:
+        raise HTTPException(422, f"Upload at most {max_files} documents")
     collected = []
     # Validate the entire request before persisting any files.
     for upload in files:
-        data = await upload.read(MAX_FILE_BYTES + 1)
-        if len(data) > MAX_FILE_BYTES:
-            raise HTTPException(413, "Each document must be 10 MB or smaller")
+        data = await upload.read(max_bytes + 1)
+        if len(data) > max_bytes:
+            raise HTTPException(413, f"Each document must be {max_bytes} bytes or smaller")
         extension, _ = sniff(data)
         try:
             with fitz.open(stream=data, filetype=extension.lstrip(".")) as document:

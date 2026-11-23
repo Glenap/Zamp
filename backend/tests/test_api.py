@@ -155,6 +155,8 @@ def test_settings_validate_and_persist_without_mutating_defaults(client):
     web, database, fixtures = client
     original = web.get("/api/settings").json()
     assert web.put("/api/settings", json={"name_match_threshold": 2}).status_code == 422
+    assert web.put("/api/settings", json={"max_documents": 5}).status_code == 422
+    assert web.put("/api/settings", json={"max_upload_bytes": -1}).status_code == 422
     assert web.put("/api/settings", json={"risk_bands": {"low": [0, 31], "medium": [31, 60], "high": [61, 100]}}).status_code == 422
     assert web.put("/api/settings", json={"required_docs": {"OTHER": [123]}}).status_code == 422
     updated = web.put("/api/settings", json={"name_match_threshold": 0.9})
@@ -162,3 +164,25 @@ def test_settings_validate_and_persist_without_mutating_defaults(client):
     assert web.get("/api/settings").json()["name_match_threshold"] == 0.9
     assert original["name_match_threshold"] == 0.85
     assert "markdown" in web.get("/api/assumptions").json()
+
+
+def test_real_pipeline_scenarios_through_http_and_durable_audit(client, monkeypatch):
+    from backend.pipeline import execute_run
+
+    web, database, fixtures = client
+    monkeypatch.setattr(api, "run_pipeline", lambda run_id, path: execute_run(run_id, db_path=path))
+    scenarios = web.get("/api/scenarios").json()
+    results = {}
+    for scenario in scenarios:
+        identifier, _ = start(web, scenario["id"])
+        detail = web.get(f"/api/runs/{identifier}").json()
+        assert detail["status"] == "completed"
+        assert detail["decision"] == scenario["expected_decision"], (scenario["id"], detail["reasons"])
+        assert len(detail["stages"]) == 9
+        assert [stage["type"] for stage in detail["stages"]] == ["RULE", "AI", "RULE", "RULE", "RULE", "RULE", "RULE", "AI", "RULE"]
+        assert all(stage["input"] and stage["output"] and stage["rule_version"] and stage["duration_ms"] >= 0 for stage in detail["stages"])
+        assert all(message["sent_at"] is None for message in detail["messages"])
+        results[scenario["id"]] = detail
+    assert results["S5"]["parent_run_id"] == results["S4"]["run_id"]
+    assert results["S5"]["diff_from_parent"]["resolved"]
+    assert "event: run_completed" in web.get(f"/api/runs/{results['S5']['run_id']}/events").text

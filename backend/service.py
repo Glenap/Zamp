@@ -199,12 +199,16 @@ def settings():
 
 
 def validate_settings(values):
+    try:
+        json.dumps(values, allow_nan=False)
+    except (ValueError, TypeError):
+        raise HTTPException(422, "Settings must contain finite JSON values")
     for name in ("name_match_threshold", "extraction_confidence_min", "sanctions_name_match_threshold"):
         value = values.get(name)
         if isinstance(value, bool) or not isinstance(value, (int, float)) or not 0 <= value <= 1:
             raise HTTPException(422, f"{name} must be a number between 0 and 1")
     band = values.get("name_match_review_band", {})
-    if not isinstance(band, dict) or not all(isinstance(band.get(k), (int, float)) for k in ("min", "max")):
+    if not isinstance(band, dict) or not all(type(band.get(k)) in (int, float) for k in ("min", "max")):
         raise HTTPException(422, "name_match_review_band requires numeric min/max")
     if not 0 <= band["min"] < band["max"] <= values["name_match_threshold"]:
         raise HTTPException(422, "Review band must be ordered and below the match threshold")
@@ -219,6 +223,21 @@ def validate_settings(values):
     for name in ("high_risk_jurisdictions", "free_mail_domains", "sanctions_list", "eu_countries"):
         if not isinstance(values.get(name), list) or any(not isinstance(v, str) for v in values[name]):
             raise HTTPException(422, f"{name} must be a list of strings")
+    for name in ("max_documents", "min_documents", "max_document_pages", "max_document_pixels", "max_upload_bytes"):
+        if type(values.get(name)) is not int or values[name] < 1:
+            raise HTTPException(422, f"{name} must be a positive integer")
+    if not 1 <= values["min_documents"] <= values["max_documents"] <= 4:
+        raise HTTPException(422, "Document limits must be ordered within 1 to 4")
+    if values.get("max_risk_score") != 100:
+        raise HTTPException(422, "max_risk_score must remain 100 to match risk bands and database limits")
+    for name in ("llm_timeout_seconds", "manual_review_minutes"):
+        if type(values.get(name)) not in (int, float) or values[name] <= 0:
+            raise HTTPException(422, f"{name} must be a positive number")
+    required_fields = values.get("required_form_fields")
+    if not isinstance(required_fields, list) or not required_fields or any(not isinstance(v, str) or not v.strip() for v in required_fields):
+        raise HTTPException(422, "required_form_fields must be a nonempty list of field names")
+    if not isinstance(values.get("rule_version"), str) or not values["rule_version"].strip():
+        raise HTTPException(422, "rule_version must be a nonempty string")
     docs = values.get("required_docs")
     if not isinstance(docs, dict) or not docs or "OTHER" not in docs:
         raise HTTPException(422, "required_docs must define country policies including OTHER")
@@ -243,4 +262,6 @@ def validate_settings(values):
         age = rule.get("max_age_days")
         if age is not None and (type(age) is not int or age < 0):
             raise HTTPException(422, "Document max_age_days must be a nonnegative integer or null")
+        if "expiry_required" in rule and not isinstance(rule["expiry_required"], bool):
+            raise HTTPException(422, "Document expiry_required must be true or false")
     return values
