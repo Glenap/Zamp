@@ -106,7 +106,7 @@ def bank_letter(c, form):
     text(c, 48, 699, "Business banking | synthetic branch", 10)
     c.line(48, 680, 564, 680)
     text(c, 48, 640, "To: Vendor onboarding team", 11)
-    text(c, 395, 640, "Issued: " + form["documents_issued_on"], 10)
+    field(c, "Issued on", form["documents_issued_on"], 640, 395)
     text(c, 48, 592, "Subject: Confirmation of account details", 15, "Helvetica-Bold")
     text(c, 48, 548, "For this test fixture, the account details supplied are:", 11)
     items = [("Account holder", form["bank_holder_name"]), ("Account number", form["bank_account"])]
