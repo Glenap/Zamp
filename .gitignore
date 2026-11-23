@@ -16,3 +16,6 @@ tmp/
 /vendor-review/
 /vendor-review.zip
 /vendor-review-deploy.tar.gz
+/dist/
+.sites-runtime/
+/outputs/

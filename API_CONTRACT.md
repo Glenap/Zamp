@@ -1,4 +1,12 @@
 Base URL http://localhost:8000. JSON unless noted.
+Hosted deployment uses the same endpoints at its Site origin.
+GET /api/runtime -> {"llm_provider","demo_mode","delivery_mode"}
+`delivery_mode=manual_outbox`: /send records the operator's manual delivery; it
+does not transmit email. Real provider modes require LLM_MODEL and the provider
+key; mock mode is explicitly labeled and cannot OCR custom uploads or scans.
+Hosted queued runs start when the review SSE stream is opened. The stream
+replays durable stage events on reconnect; no pipeline result comes from a
+scenario's expected_decision. Private Sites access protects the hosted records.
 Enums: run.status queued|running|completed|failed; decision
 APPROVED|PENDING|REJECTED; stage.status
 queued|running|passed|warning|failed|needs_manual_review; stage.type AI|RULE.

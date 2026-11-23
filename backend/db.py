@@ -112,6 +112,10 @@ def connect(path=None):
 
 def init_db(path=None):
     with connect(path) as connection:
+        # Upgrade an early Task 1 database before indexes or queries use the link.
+        columns = {row[1] for row in connection.execute("PRAGMA table_info(runs)")}
+        if columns and "parent_run_id" not in columns:
+            connection.execute("ALTER TABLE runs ADD COLUMN parent_run_id INTEGER REFERENCES runs(id)")
         connection.executescript(SCHEMA)
         # Preserve operator settings on normal app startup. Reset explicitly reloads defaults.
         defaults = json.loads(SETTINGS_PATH.read_text(encoding="utf-8"))

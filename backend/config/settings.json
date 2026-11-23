@@ -135,5 +135,22 @@
     "insurance_certificate": {
       "expiry_required": true
     }
-  }
+  },
+  "rule_version": "1.0",
+  "required_form_fields": [
+    "legal_name",
+    "country",
+    "tax_id",
+    "bank_account",
+    "contact_email",
+    "incorporated_on"
+  ],
+  "max_documents": 4,
+  "min_documents": 1,
+  "max_document_pages": 8,
+  "max_document_pixels": 1600,
+  "llm_timeout_seconds": 60,
+  "max_risk_score": 100,
+  "max_upload_bytes": 10485760,
+  "manual_review_minutes": 15
 }
