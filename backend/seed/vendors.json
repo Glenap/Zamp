@@ -1,0 +1,222 @@
+[
+  {
+    "id": 1,
+    "legal_name": "Northwind Industrial Supplies LLC",
+    "trade_name": null,
+    "country": "US",
+    "tax_id": "82-9000101",
+    "bank_account": "9000000101",
+    "iban": null,
+    "status": "APPROVED",
+    "email_domain": "northwind-industrial.example"
+  },
+  {
+    "id": 2,
+    "legal_name": "Juniper Ridge Materials LLC",
+    "trade_name": null,
+    "country": "US",
+    "tax_id": "82-9000102",
+    "bank_account": "9000000102",
+    "iban": null,
+    "status": "APPROVED",
+    "email_domain": "juniper-ridge.example"
+  },
+  {
+    "id": 3,
+    "legal_name": "Blue Heron Packaging Inc",
+    "trade_name": null,
+    "country": "US",
+    "tax_id": "82-9000103",
+    "bank_account": "9000000103",
+    "iban": null,
+    "status": "APPROVED",
+    "email_domain": "blue-heron.example"
+  },
+  {
+    "id": 4,
+    "legal_name": "Ironvale Toolworks LLC",
+    "trade_name": "Ironvale Tools",
+    "country": "US",
+    "tax_id": "82-9000104",
+    "bank_account": "9000000104",
+    "iban": null,
+    "status": "APPROVED",
+    "email_domain": "ironvale-toolworks.example"
+  },
+  {
+    "id": 5,
+    "legal_name": "Marble Creek Safety Products LLC",
+    "trade_name": null,
+    "country": "US",
+    "tax_id": "82-9000105",
+    "bank_account": "9000000105",
+    "iban": null,
+    "status": "PENDING",
+    "email_domain": "marble-creek.example"
+  },
+  {
+    "id": 6,
+    "legal_name": "Harborlight Commercial Cleaning Inc",
+    "trade_name": null,
+    "country": "US",
+    "tax_id": "82-9000106",
+    "bank_account": "9000000106",
+    "iban": null,
+    "status": "APPROVED",
+    "email_domain": "harborlight-commercial.example"
+  },
+  {
+    "id": 7,
+    "legal_name": "Red Cedar Fleet Services LLC",
+    "trade_name": null,
+    "country": "US",
+    "tax_id": "82-9000107",
+    "bank_account": "9000000107",
+    "iban": null,
+    "status": "APPROVED",
+    "email_domain": "red-cedar.example"
+  },
+  {
+    "id": 8,
+    "legal_name": "Morrow Field Equipment Inc",
+    "trade_name": null,
+    "country": "US",
+    "tax_id": "82-9000108",
+    "bank_account": "9000000108",
+    "iban": null,
+    "status": "APPROVED",
+    "email_domain": "morrow-field.example"
+  },
+  {
+    "id": 9,
+    "legal_name": "Silver Fern Office Systems LLC",
+    "trade_name": null,
+    "country": "US",
+    "tax_id": "82-9000109",
+    "bank_account": "9000000109",
+    "iban": null,
+    "status": "APPROVED",
+    "email_domain": "silver-fern.example"
+  },
+  {
+    "id": 10,
+    "legal_name": "Canyon Lark Facilities Inc",
+    "trade_name": null,
+    "country": "US",
+    "tax_id": "82-9000110",
+    "bank_account": "9000000110",
+    "iban": null,
+    "status": "APPROVED",
+    "email_domain": "canyon-lark.example"
+  },
+  {
+    "id": 11,
+    "legal_name": "Aarohi Precision Works Pvt Ltd",
+    "trade_name": null,
+    "country": "IN",
+    "tax_id": "27AAAPA1011A1Z2",
+    "bank_account": "9000000111",
+    "iban": null,
+    "status": "APPROVED",
+    "email_domain": "aarohi-precision.example"
+  },
+  {
+    "id": 12,
+    "legal_name": "Kaveri Industrial Textiles Pvt Ltd",
+    "trade_name": null,
+    "country": "IN",
+    "tax_id": "27AAAPA1012A1Z1",
+    "bank_account": "9000000112",
+    "iban": null,
+    "status": "APPROVED",
+    "email_domain": "kaveri-industrial.example"
+  },
+  {
+    "id": 13,
+    "legal_name": "Neelkanth Office Systems Pvt Ltd",
+    "trade_name": null,
+    "country": "IN",
+    "tax_id": "27AAAPA1013A1Z0",
+    "bank_account": "9000000113",
+    "iban": null,
+    "status": "PENDING",
+    "email_domain": "neelkanth-office.example"
+  },
+  {
+    "id": 14,
+    "legal_name": "Indigo Lotus Engineering Pvt Ltd",
+    "trade_name": null,
+    "country": "IN",
+    "tax_id": "27AAAPA1014A1ZZ",
+    "bank_account": "9000000114",
+    "iban": null,
+    "status": "APPROVED",
+    "email_domain": "indigo-lotus.example"
+  },
+  {
+    "id": 15,
+    "legal_name": "Prism Banyan Controls Pvt Ltd",
+    "trade_name": null,
+    "country": "IN",
+    "tax_id": "27AAAPA1015A1ZY",
+    "bank_account": "9000000115",
+    "iban": null,
+    "status": "APPROVED",
+    "email_domain": "prism-banyan.example"
+  },
+  {
+    "id": 16,
+    "legal_name": "Aranya Packaging Pvt Ltd",
+    "trade_name": null,
+    "country": "IN",
+    "tax_id": "27AAAPA1016A1ZX",
+    "bank_account": "9000000116",
+    "iban": null,
+    "status": "APPROVED",
+    "email_domain": "aranya-packaging.example"
+  },
+  {
+    "id": 17,
+    "legal_name": "Nordhafen Messtechnik GmbH",
+    "trade_name": null,
+    "country": "DE",
+    "tax_id": "DE900010165",
+    "bank_account": "9000000117",
+    "iban": "DE48999999999000000117",
+    "status": "APPROVED",
+    "email_domain": "nordhafen-messtechnik.example"
+  },
+  {
+    "id": 18,
+    "legal_name": "Tannenbogen Werkzeuge GmbH",
+    "trade_name": null,
+    "country": "DE",
+    "tax_id": "DE900010173",
+    "bank_account": "9000000118",
+    "iban": "DE21999999999000000118",
+    "status": "APPROVED",
+    "email_domain": "tannenbogen-werkzeuge.example"
+  },
+  {
+    "id": 19,
+    "legal_name": "Rheinbogen Verpackung GmbH",
+    "trade_name": null,
+    "country": "DE",
+    "tax_id": "DE900010181",
+    "bank_account": "9000000119",
+    "iban": "DE91999999999000000119",
+    "status": "APPROVED",
+    "email_domain": "rheinbogen-verpackung.example"
+  },
+  {
+    "id": 20,
+    "legal_name": "Kupferhain Automation GmbH",
+    "trade_name": null,
+    "country": "DE",
+    "tax_id": "DE900010190",
+    "bank_account": "9000000120",
+    "iban": "DE64999999999000000120",
+    "status": "REJECTED",
+    "email_domain": "kupferhain-automation.example"
+  }
+]

@@ -1,0 +1,1 @@
+"""VendorGate backend."""

@@ -1,0 +1,139 @@
+{
+  "name_match_threshold": 0.85,
+  "name_match_review_band": {
+    "min": 0.65,
+    "max": 0.85
+  },
+  "risk_bands": {
+    "low": [
+      0,
+      30
+    ],
+    "medium": [
+      31,
+      60
+    ],
+    "high": [
+      61,
+      100
+    ]
+  },
+  "extraction_confidence_min": 0.75,
+  "new_company_days": 90,
+  "required_docs": {
+    "US": [
+      "w9",
+      [
+        "bank_letter",
+        "cancelled_cheque"
+      ]
+    ],
+    "IN": [
+      "gst_certificate",
+      [
+        "bank_letter",
+        "cancelled_cheque"
+      ]
+    ],
+    "DE": [
+      "vat_certificate",
+      "bank_letter"
+    ],
+    "GB": [
+      "vat_certificate",
+      "bank_letter"
+    ],
+    "EU": [
+      "vat_certificate",
+      "bank_letter"
+    ],
+    "OTHER": [
+      "incorporation_certificate",
+      "bank_letter"
+    ]
+  },
+  "country_aliases": {
+    "UK": "GB"
+  },
+  "eu_countries": [
+    "AT",
+    "BE",
+    "BG",
+    "HR",
+    "CY",
+    "CZ",
+    "DK",
+    "EE",
+    "FI",
+    "FR",
+    "GR",
+    "HU",
+    "IE",
+    "IT",
+    "LV",
+    "LT",
+    "LU",
+    "MT",
+    "NL",
+    "PL",
+    "PT",
+    "RO",
+    "SK",
+    "SI",
+    "ES",
+    "SE"
+  ],
+  "high_risk_jurisdictions": [
+    "XZ",
+    "XY",
+    "XW"
+  ],
+  "free_mail_domains": [
+    "gmail.com",
+    "yahoo.com",
+    "outlook.com",
+    "hotmail.com",
+    "icloud.com",
+    "proton.me"
+  ],
+  "sanctions_list": [
+    "Crimson Quay Trading LLC",
+    "Obsidian Meridian Holdings",
+    "Velvet Kestrel Exports",
+    "Cobalt Dune Logistics",
+    "Sable Orchard Systems",
+    "Dusk Fern Imports",
+    "Hollow Beacon Supply",
+    "Slate Vireo Partners",
+    "Ashen Compass Freight",
+    "Ivory Torrent Metals",
+    "Silent Juniper Works",
+    "Copper Gloam Ventures",
+    "Mauve Crown Logistics",
+    "Frost Ember Maritime",
+    "Onyx Thistle Resources"
+  ],
+  "sanctions_name_match_threshold": 0.93,
+  "high_spend_threshold": 100000,
+  "risk_signal_weights": {
+    "sanctions_match": 100,
+    "duplicate_tax_id": 60,
+    "duplicate_bank_account": 65,
+    "duplicate_iban": 65,
+    "high_risk_jurisdiction": 35,
+    "po_box_only": 10,
+    "recent_company_high_spend": 25,
+    "foreign_bank": 15
+  },
+  "document_validity_rules": {
+    "bank_letter": {
+      "max_age_days": 90
+    },
+    "cancelled_cheque": {
+      "max_age_days": null
+    },
+    "insurance_certificate": {
+      "expiry_required": true
+    }
+  }
+}
