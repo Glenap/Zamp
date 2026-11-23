@@ -1,0 +1,195 @@
+{
+  "fixture_only": true,
+  "reference_date": "2026-11-23",
+  "notice": "Expected outcomes are test intentions, not pipeline outputs. All documents are synthetic.",
+  "scenarios": [
+    {
+      "id": "S1",
+      "parent_submission_id": null,
+      "title": "Complete US submission",
+      "form": {
+        "legal_name": "Brightline Logistics LLC",
+        "trade_name": null,
+        "country": "US",
+        "contact_name": "Demo Procurement Contact",
+        "contact_email": "onboarding@brightline-logistics.example",
+        "email_domain": "brightline-logistics.example",
+        "tax_id": "36-7000101",
+        "tax_id_type": "EIN",
+        "bank_account": "740015920101",
+        "bank_holder_name": "Brightline Logistics LLC",
+        "incorporated_on": "2018-04-16",
+        "registered_address": "100 Example Commerce Way, Demo Industrial Park",
+        "bank_country": "US",
+        "annual_spend": 50000,
+        "aba": "021000021",
+        "documents_issued_on": "2026-11-23"
+      },
+      "documents": [
+        "s1_w9.pdf",
+        "s1_bank_letter.pdf",
+        "s1_incorporation.pdf"
+      ],
+      "expected_decision": "APPROVED",
+      "description": "Happy path: complete, consistent US evidence.",
+      "intentional_comment": "No intentional defects."
+    },
+    {
+      "id": "S2",
+      "parent_submission_id": null,
+      "title": "Trade-name mismatch",
+      "form": {
+        "legal_name": "Sundaram Fasteners Pvt Ltd",
+        "trade_name": null,
+        "country": "IN",
+        "contact_name": "Demo Procurement Contact",
+        "contact_email": "onboarding@sundaram-fasteners.example",
+        "email_domain": "sundaram-fasteners.example",
+        "tax_id": "33AACCS1234K1ZM",
+        "tax_id_type": "GSTIN",
+        "bank_account": "50200076543210",
+        "bank_holder_name": "Sundaram Fasteners Pvt Ltd",
+        "incorporated_on": "2018-04-16",
+        "registered_address": "100 Example Commerce Way, Demo Industrial Park",
+        "bank_country": "IN",
+        "annual_spend": 50000,
+        "ifsc": "HDFC0001234",
+        "documents_issued_on": "2026-11-23"
+      },
+      "documents": [
+        "s2_gst_certificate.pdf",
+        "s2_cancelled_cheque.pdf",
+        "s2_incorporation.pdf"
+      ],
+      "expected_decision": "PENDING",
+      "description": "Manual review: bank holder Sundaram Traders differs from legal name without alias proof.",
+      "intentional_comment": "Intentional bank-holder mismatch only; GSTIN and IFSC remain valid."
+    },
+    {
+      "id": "S3",
+      "parent_submission_id": null,
+      "title": "Reused bank account",
+      "form": {
+        "legal_name": "Silvercrest Rapid Sourcing LLC",
+        "trade_name": null,
+        "country": "US",
+        "contact_name": "Demo Procurement Contact",
+        "contact_email": "onboarding@silvercrest-rapid.example",
+        "email_domain": "silvercrest-rapid.example",
+        "tax_id": "36-7000103",
+        "tax_id_type": "EIN",
+        "bank_account": "9000000101",
+        "bank_holder_name": "Silvercrest Rapid Sourcing LLC",
+        "incorporated_on": "2026-10-24",
+        "registered_address": "100 Example Commerce Way, Demo Industrial Park",
+        "bank_country": "US",
+        "annual_spend": 250000,
+        "aba": "021000021",
+        "documents_issued_on": "2026-11-23"
+      },
+      "documents": [
+        "s3_w9.pdf",
+        "s3_bank_letter.pdf",
+        "s3_incorporation.pdf"
+      ],
+      "expected_decision": "REJECTED",
+      "description": "Bank-detail fraud indicator: account reused from approved Northwind; new name/domain, age <90 days.",
+      "intentional_comment": "Intentional shared bank account and recent incorporation; no checksum defects."
+    },
+    {
+      "id": "S4",
+      "parent_submission_id": null,
+      "title": "Wrong and unreadable documents",
+      "form": {
+        "legal_name": "Rheinblick Maschinenhandel GmbH",
+        "trade_name": null,
+        "country": "DE",
+        "contact_name": "Demo Procurement Contact",
+        "contact_email": "onboarding@rheinblick-demo.example",
+        "email_domain": "rheinblick-demo.example",
+        "tax_id": "DE123456788",
+        "tax_id_type": "VAT",
+        "bank_account": "0532013000",
+        "bank_holder_name": "Rheinblick Maschinenhandel GmbH",
+        "incorporated_on": "2018-04-16",
+        "registered_address": "100 Example Commerce Way, Demo Industrial Park",
+        "bank_country": "DE",
+        "annual_spend": 50000,
+        "iban": "DE89370400440532013000",
+        "bic": "COBADEFFXXX",
+        "documents_issued_on": "2026-11-23"
+      },
+      "documents": [
+        "s4_wrong_w9.pdf",
+        "s4_bank_scan.pdf",
+        "s4_incorporation.pdf"
+      ],
+      "expected_decision": "PENDING",
+      "description": "Wrong-country tax document and low-quality image-only bank letter require corrected evidence.",
+      "intentional_comment": "Intentional US W-9 instead of German VAT evidence, plus degraded scan. All numeric identifiers remain valid."
+    },
+    {
+      "id": "S5",
+      "parent_submission_id": "S4",
+      "title": "Corrected resubmission",
+      "form": {
+        "legal_name": "Rheinblick Maschinenhandel GmbH",
+        "trade_name": null,
+        "country": "DE",
+        "contact_name": "Demo Procurement Contact",
+        "contact_email": "onboarding@rheinblick-demo.example",
+        "email_domain": "rheinblick-demo.example",
+        "tax_id": "DE123456788",
+        "tax_id_type": "VAT",
+        "bank_account": "0532013000",
+        "bank_holder_name": "Rheinblick Maschinenhandel GmbH",
+        "incorporated_on": "2018-04-16",
+        "registered_address": "100 Example Commerce Way, Demo Industrial Park",
+        "bank_country": "DE",
+        "annual_spend": 50000,
+        "iban": "DE89370400440532013000",
+        "bic": "COBADEFFXXX",
+        "documents_issued_on": "2026-11-23"
+      },
+      "documents": [
+        "s5_vat_certificate.pdf",
+        "s5_bank_letter.pdf",
+        "s4_incorporation.pdf"
+      ],
+      "expected_decision": "APPROVED",
+      "description": "Resubmission of S4: corrected VAT certificate and clear bank letter resolve document defects.",
+      "intentional_comment": "No remaining intentional defect; same form and incorporation document as S4."
+    },
+    {
+      "id": "S6",
+      "parent_submission_id": null,
+      "title": "Mock sanctions-list hit",
+      "form": {
+        "legal_name": "Crimson Quay Trading LLC",
+        "trade_name": null,
+        "country": "US",
+        "contact_name": "Demo Procurement Contact",
+        "contact_email": "onboarding@obsidian-meridian.example",
+        "email_domain": "obsidian-meridian.example",
+        "tax_id": "36-7000106",
+        "tax_id_type": "EIN",
+        "bank_account": "740015920106",
+        "bank_holder_name": "Crimson Quay Trading LLC",
+        "incorporated_on": "2018-04-16",
+        "registered_address": "100 Example Commerce Way, Demo Industrial Park",
+        "bank_country": "US",
+        "annual_spend": 50000,
+        "aba": "021000021",
+        "documents_issued_on": "2026-11-23"
+      },
+      "documents": [
+        "s6_w9.pdf",
+        "s6_bank_letter.pdf",
+        "s6_incorporation.pdf"
+      ],
+      "expected_decision": "REJECTED",
+      "description": "Exact hit in mock sanctions list; all other supplied evidence is consistent.",
+      "intentional_comment": "Intentional fictional sanctions-name hit only; no checksum defects."
+    }
+  ]
+}

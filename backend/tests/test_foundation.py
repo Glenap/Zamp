@@ -35,7 +35,7 @@ def test_seed_cli_reset_is_repeatable_and_restores_defaults(tmp_path):
     init_db(path)
     with connect(path) as connection:
         connection.execute("INSERT INTO submissions(id, form_json) VALUES ('keep-me', '{}')")
-    args = [sys.executable, str(BACKEND / "seed" / "seed.py"), "--reset"]
+    args = [sys.executable, str(BACKEND / "seed" / "seed.py"), "--reset", "--output-dir", str(tmp_path / "fixtures")]
     for _ in range(2):
         with connect(path) as connection:
             connection.execute("UPDATE settings SET value_json = '0.10' WHERE key = 'name_match_threshold'")
